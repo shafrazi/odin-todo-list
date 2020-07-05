@@ -4,10 +4,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
   <title>ToDo App</title>
 </head>
 
 <body>
+  <header>
+    <h1 class="logo">
+      To Dos
+    </h1>
+  </header>
+  <div class="wrapper">
+    <div class="main-menu">
+      <button class="accordion">Pending items</button>
+      <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.</p>
+      </div>
+      <button class="accordion">Projects</button>
+      <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.</p>
+      </div>
+      <button class="accordion">Completed items</button>
+      <div class="panel">
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
+          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+          commodo consequat.</p>
+      </div>
+    </div>
+    <div class="content">
+      <button class="btn-primary" id="create-todo-btn">Create To Do</button>
+    </div>
+
+    <div class="new-todo-form">
+      <form>
+        <div class="form-group">
+          <label for="title">Title : </label>
+          <input type="text" id="title">
+        </div>
+        <div class="form-group">
+          <label for="project">Project : </label>
+          <input type="text" id="project">
+        </div>
+        <button class="btn-primary">Add task</button>
+      </form>
+    </div>
+  </div>
   <script src="main.js"></script>
 </body>
 

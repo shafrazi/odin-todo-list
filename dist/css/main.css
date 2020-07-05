@@ -1,0 +1,115 @@
+* {
+  box-sizing: border-box;
+  font-family: "Fredoka One";
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  font-family: 'Fredoka One', cursive;
+  text-align: center;
+}
+
+.logo {
+  background-color: orange;
+  margin: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+
+.main-menu {
+  grid-area: main-menu;
+}
+
+.content {
+  grid-area: content;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* grid-template-rows: 1fr 1fr; */
+  width: 95%;
+  margin: 10px auto;
+  grid-gap: 10px;
+  grid-template-areas:
+    "content"
+    "main-menu";
+}
+
+.btn-primary {
+  width: 100%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 0.8em;
+  font-size: 0.8em;
+  border: none;
+  background-color: #629af1;
+}
+
+/* accordion styles */
+
+.accordion {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  transition: 0.4s;
+}
+
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+.accordion:after {
+  content: '\002B';
+  color: #777;
+  font-weight: bold;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2212";
+}
+
+.panel {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+/* form-elements */
+
+.new-todo-form {
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+  border: solid 1px gray;
+}
+
+.form-group {
+  margin-top: 10px;
+  display: grid;
+  margin-bottom: 5px;
+}
+
+/* media-queries */
+
+@media(min-width: 768px) {
+  .accordion {
+    display: none;
+  }
+}
