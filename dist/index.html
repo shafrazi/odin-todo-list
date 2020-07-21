@@ -19,9 +19,7 @@
     <div class="main-menu">
       <button class="accordion">Pending items</button>
       <div class="panel">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</p>
+        <ul class="pending-todos-list"></ul>
       </div>
       <button class="accordion">Projects</button>
       <div class="panel">
@@ -41,17 +39,17 @@
     </div>
 
     <div class="new-todo-form">
-      <form>
-        <div class="form-group">
-          <label for="title">Title : </label>
-          <input type="text" id="title">
-        </div>
-        <div class="form-group">
-          <label for="project">Project : </label>
-          <input type="text" id="project">
-        </div>
-        <button class="btn-primary">Add task</button>
-      </form>
+
+      <div class="form-group">
+        <label for="title">Title : </label>
+        <input type="text" id="title">
+      </div>
+      <div class="form-group">
+        <label for="project">Project : </label>
+        <input type="text" id="project">
+      </div>
+      <button class="btn-primary" id="add-task-btn">Add task</button>
+
     </div>
   </div>
   <script src="main.js"></script>

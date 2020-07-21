@@ -51,6 +51,14 @@ header {
   background-color: #629af1;
 }
 
+ul {
+  list-style: none;
+}
+
+.task-check {
+  margin-right: 10px;
+}
+
 /* accordion styles */
 
 .accordion {
