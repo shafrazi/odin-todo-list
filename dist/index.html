@@ -17,15 +17,13 @@
   </header>
   <div class="wrapper">
     <div class="main-menu">
+      <button class="accordion">All items</button>
+      <div class="panel">
+        <ul class="all-todos-list"></ul>
+      </div>
       <button class="accordion">Pending items</button>
       <div class="panel">
         <ul class="pending-todos-list"></ul>
-      </div>
-      <button class="accordion">Projects</button>
-      <div class="panel">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-          dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.</p>
       </div>
       <button class="accordion">Completed items</button>
       <div class="panel">
@@ -35,25 +33,35 @@
       </div>
     </div>
     <div class="side-bar">
-      <p>Hello</p>
+      <div class="sidebar-content">
+        <a href="#" class="sidebar-link" id="all-items">All items</a>
+        <a href="#" class="sidebar-link" id="pending-items">Pending items</a>
+        <a href="#" class="sidebar-link" id="completed-items">Completed items</a>
+        <hr>
+        <a href="#" class="sidebar-link" id="projects">Projects</a>
+      </div>
     </div>
     <div class="content">
-      <button class="btn-primary" id="create-todo-btn">Create To Do</button>
-      <p>content</p>
+      <div class="btn-area">
+        <button class="btn-primary" id="create-todo-btn">Create To Do</button>
+      </div>
+      <div class="items">
+        hello
+      </div>
     </div>
 
-    <div class="new-todo-form">
-
-      <div class="form-group">
-        <label for="title">Title : </label>
-        <input type="text" id="title">
+    <div class="modal">
+      <div class="new-todo-form">
+        <div class="form-group">
+          <label for="title">Title : </label>
+          <input type="text" id="title">
+        </div>
+        <div class="form-group">
+          <label for="project">Project : </label>
+          <input type="text" id="project">
+        </div>
+        <button class="btn-primary" id="new-task-btn">Add task</button>
       </div>
-      <div class="form-group">
-        <label for="project">Project : </label>
-        <input type="text" id="project">
-      </div>
-      <button class="btn-primary" id="add-task-btn">Add task</button>
-
     </div>
   </div>
   <script src="main.js"></script>

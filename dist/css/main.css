@@ -131,9 +131,9 @@ ul {
   }
 
   .side-bar {
-    display: grid;
+    display: block;
     grid-area: side-bar;
-    height: 50vh;
+    height: 100vh;
     background-color: white;
   }
 
@@ -141,24 +141,65 @@ ul {
     display: grid;
     grid-template-columns: 1fr 4fr;
     /* grid-template-rows: 1fr 1fr; */
-    width: 80%;
-    margin: 30px auto;
+    width: 100%;
+    margin: 0px auto;
     grid-gap: 10px;
     grid-template-areas:
       "side-bar content";
   }
 
-  .new-todo-form {
+  .modal {
     display: none;
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    padding-top: 150px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+  }
+
+  .new-todo-form {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 10px;
+    width: 50%;
   }
 
   .main-menu {
     display: none;
   }
 
+  .btn-area {
+    grid-area: btn-area;
+  }
+
+  .items {
+    margin: 10px auto;
+    grid-area: items;
+  }
+
   .content {
     display: grid;
     text-align: center;
+    grid-gap: 5px;
+    grid-template-rows: 1fr 5fr;
+    grid-template-areas:
+      "btn-area"
+      "items";
   }
 
   .btn-primary {
@@ -170,6 +211,23 @@ ul {
     font-size: 0.8em;
     border: none;
     background-color: #629af1;
-    margin: 10px auto;
+    margin: 30px auto;
+  }
+
+  #new-task-btn {
+    display: block;
+    margin: 30px auto;
+  }
+
+  .sidebar-content {
+    width: 80%;
+    margin: 20px auto;
+  }
+
+  .sidebar-link {
+    display: block;
+    text-decoration: none;
+    padding: 5px;
+    font-size: 18px;
   }
 }

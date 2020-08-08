@@ -1,5 +1,6 @@
 import { Todo } from "./todo";
 import { Project } from "./project";
+import { render } from "./render_items";
 
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -29,9 +30,10 @@ const checkTask = (event) => {
 
 const titleInput = document.querySelector("#title");
 const projectInput = document.querySelector("#project");
-const addTaskBtn = document.querySelector("#add-task-btn");
-const toDos = [];
+const addTaskBtn = document.querySelector("#new-task-btn");
+let toDos = ["hello"];
 
+// if (addTaskBtn) {
 addTaskBtn.addEventListener("click", () => {
   let title = titleInput.value;
   let project = projectInput.value;
@@ -45,3 +47,22 @@ addTaskBtn.addEventListener("click", () => {
   ul.appendChild(li);
   checkbox.addEventListener("change", checkTask);
 });
+// }
+
+// create new task modal
+
+const modal = document.querySelector(".modal");
+const createTaskBtn = document.querySelector("#create-todo-btn");
+
+createTaskBtn.onclick = function () {
+  modal.style.display = "block";
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+console.log(toDos);
+render();
