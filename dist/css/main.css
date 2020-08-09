@@ -188,14 +188,16 @@ ul {
   }
 
   .items {
-    margin: 10px auto;
+    margin: 10px;
     grid-area: items;
+    text-align: left;
   }
 
   .content {
     display: grid;
     text-align: center;
     grid-gap: 5px;
+    grid-template-columns: 1fr;
     grid-template-rows: 1fr 5fr;
     grid-template-areas:
       "btn-area"
@@ -221,7 +223,7 @@ ul {
 
   .sidebar-content {
     width: 80%;
-    margin: 20px auto;
+    margin: 100px auto;
   }
 
   .sidebar-link {
@@ -229,5 +231,11 @@ ul {
     text-decoration: none;
     padding: 5px;
     font-size: 18px;
+  }
+
+  .task-check {
+    transform: scale(5);
+    margin-right: 30px;
+    margin-bottom: 20px;
   }
 }

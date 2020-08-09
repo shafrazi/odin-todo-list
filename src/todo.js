@@ -19,6 +19,9 @@ class Todo {
     const titleSpan = document.createElement("span");
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
+    if (this.complete) {
+      checkbox.checked = true;
+    }
     checkbox.setAttribute("class", "task-check");
     li.appendChild(checkbox);
     titleSpan.innerHTML = this.title;
