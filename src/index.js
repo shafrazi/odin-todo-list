@@ -1,4 +1,9 @@
-import { addTask, renderItems, clearItems } from "./render_items";
+import {
+  addTask,
+  renderItems,
+  clearItems,
+  removeModalButtons,
+} from "./render_items";
 
 var acc = document.getElementsByClassName("accordion");
 var i;
@@ -17,14 +22,9 @@ for (i = 0; i < acc.length; i++) {
 
 const titleInput = document.querySelector("#title");
 const projectInput = document.querySelector("#project");
-const addTaskBtn = document.querySelector("#new-task-btn");
 const allItems = document.querySelector("#all-items");
 const pendingItems = document.querySelector("#pending-items");
 const completedItems = document.querySelector("#completed-items");
-
-addTaskBtn.addEventListener("click", () => {
-  addTask(titleInput.value, projectInput.value);
-});
 
 allItems.addEventListener("click", () => {
   clearItems();
@@ -46,12 +46,30 @@ completedItems.addEventListener("click", () => {
 const modal = document.querySelector(".modal");
 const createTaskBtn = document.querySelector("#create-todo-btn");
 
+const generateAddTaskBtn = () => {
+  const buttonsDiv = document.createElement("div");
+  buttonsDiv.classList.add("button-div");
+  const newTaskBtn = document.createElement("button");
+  newTaskBtn.classList.add("btn-primary");
+  newTaskBtn.setAttribute("id", "new-task-btn");
+  newTaskBtn.innerHTML = "Add task";
+  newTaskBtn.addEventListener("click", () => {
+    addTask(titleInput.value, projectInput.value);
+  });
+  buttonsDiv.appendChild(newTaskBtn);
+  return buttonsDiv;
+};
+
 createTaskBtn.onclick = function () {
+  const form = modal.querySelector(".new-todo-form");
+  const buttonsDiv = generateAddTaskBtn();
+  form.appendChild(buttonsDiv);
   modal.style.display = "block";
 };
 
 window.onclick = function (event) {
   if (event.target == modal) {
+    removeModalButtons();
     modal.style.display = "none";
   }
 };
