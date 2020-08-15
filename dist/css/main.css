@@ -291,4 +291,18 @@ ul {
   .delete-btn {
     background-color: #f75a6e;
   }
+
+  #projects {
+    display: inline-block;
+    margin-right: 15px;
+  }
+
+  #add-project-btn {
+    display: inline-block;
+    background-color: #629af1;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    width: 100px;
+  }
 }

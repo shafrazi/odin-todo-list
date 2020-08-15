@@ -3,6 +3,7 @@ import {
   renderItems,
   clearItems,
   removeModalButtons,
+  generateTodoFormDiv,
 } from "./render_items";
 
 var acc = document.getElementsByClassName("accordion");

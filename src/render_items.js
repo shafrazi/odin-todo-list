@@ -78,6 +78,33 @@ const renderItems = (type) => {
   }
 };
 
+const setFormElementAttributes = (div, field) => {
+  const label = div.querySelector("label");
+  const input = div.querySelector("input");
+  label.htmlFor = field;
+  label.innerHTML = `${field[0].toUpperCase() + field.slice(1)} : `;
+  input.setAttribute("id", field);
+};
+
+const generateTodoFormDiv = () => {
+  const div = document.createElement("div");
+  const formGroupTitle = document.createElement("div");
+  const labelTitle = document.createElement("label");
+  const inputTitle = document.createElement("input");
+  div.classList.add("todo-form");
+  formGroupTitle.classList.add("form-group");
+  inputTitle.type = "text";
+  formGroupTitle.appendChild(labelTitle);
+  formGroupTitle.appendChild(inputTitle);
+
+  const formGroupProject = formGroupTitle.cloneNode(true);
+  setFormElementAttributes(formGroupTitle, "title");
+  setFormElementAttributes(formGroupProject, "project");
+  div.appendChild(formGroupTitle);
+  div.appendChild(formGroupProject);
+  return div;
+};
+
 const removeModalButtons = () => {
   const buttonsDiv = modal.querySelector(".button-div");
   const todoForm = modal.querySelector(".new-todo-form");
@@ -138,4 +165,10 @@ const editTask = (event) => {
   modal.style.display = "block";
 };
 
-export { addTask, renderItems, clearItems, removeModalButtons };
+export {
+  addTask,
+  renderItems,
+  clearItems,
+  removeModalButtons,
+  generateTodoFormDiv,
+};
