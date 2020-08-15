@@ -2,7 +2,7 @@ import { Todo } from "./todo";
 
 const toDos = [];
 const modal = document.querySelector(".modal");
-const form = modal.querySelector(".new-todo-form");
+// const form = modal.querySelector(".new-todo-form");
 const itemsDiv = document.querySelector(".items");
 
 const getTodoFromElement = (event) => {
@@ -105,9 +105,14 @@ const generateTodoFormDiv = () => {
   return div;
 };
 
+const clearTodoForm = () => {
+  const todoForm = modal.firstElementChild;
+  modal.removeChild(todoForm);
+};
+
 const removeModalButtons = () => {
   const buttonsDiv = modal.querySelector(".button-div");
-  const todoForm = modal.querySelector(".new-todo-form");
+  const todoForm = modal.querySelector(".todo-form");
   todoForm.removeChild(buttonsDiv);
 };
 
@@ -150,15 +155,21 @@ const clearItems = () => {
 };
 
 const populateForm = (todo) => {
+  const form = document.querySelector(".todo-form");
   form.querySelector("#title").value = todo.title;
   form.querySelector("#project").value = todo.project;
 };
 
 const editTask = (event) => {
   const ul = event.target.parentElement.parentElement;
+  const form = generateTodoFormDiv();
   const page = ul.classList[1];
   const todo = getTodoFromElement(event);
   const buttonsDiv = generateEditTaskButtons(todo);
+  if (modal.firstElementChild) {
+    clearTodoForm();
+  }
+  modal.appendChild(form);
   buttonsDiv.setAttribute("data-source-page", page);
   form.appendChild(buttonsDiv);
   populateForm(todo);
@@ -171,4 +182,5 @@ export {
   clearItems,
   removeModalButtons,
   generateTodoFormDiv,
+  clearTodoForm,
 };

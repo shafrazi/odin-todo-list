@@ -140,7 +140,7 @@ ul {
 
 /* form-elements */
 
-.new-todo-form {
+.todo-form {
   width: 90%;
   margin: auto;
   padding: 10px;
@@ -205,7 +205,7 @@ ul {
     /* Black w/ opacity */
   }
 
-  .new-todo-form {
+  .todo-form {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;

@@ -4,6 +4,7 @@ import {
   clearItems,
   removeModalButtons,
   generateTodoFormDiv,
+  clearTodoForm,
 } from "./render_items";
 
 var acc = document.getElementsByClassName("accordion");
@@ -21,8 +22,6 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 
-const titleInput = document.querySelector("#title");
-const projectInput = document.querySelector("#project");
 const allItems = document.querySelector("#all-items");
 const pendingItems = document.querySelector("#pending-items");
 const completedItems = document.querySelector("#completed-items");
@@ -49,6 +48,9 @@ const createTaskBtn = document.querySelector("#create-todo-btn");
 
 const generateAddTaskBtn = () => {
   const buttonsDiv = document.createElement("div");
+  const titleInput = modal.querySelector("#title");
+  const projectInput = modal.querySelector("#project");
+  console.log(titleInput);
   buttonsDiv.classList.add("button-div");
   const newTaskBtn = document.createElement("button");
   newTaskBtn.classList.add("btn-primary");
@@ -62,7 +64,8 @@ const generateAddTaskBtn = () => {
 };
 
 createTaskBtn.onclick = function () {
-  const form = modal.querySelector(".new-todo-form");
+  const form = generateTodoFormDiv();
+  modal.appendChild(form);
   const buttonsDiv = generateAddTaskBtn();
   form.appendChild(buttonsDiv);
   modal.style.display = "block";
@@ -71,6 +74,7 @@ createTaskBtn.onclick = function () {
 window.onclick = function (event) {
   if (event.target == modal) {
     removeModalButtons();
+    clearTodoForm();
     modal.style.display = "none";
   }
 };
