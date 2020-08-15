@@ -285,5 +285,10 @@ ul {
     flex-grow: 1;
     flex-basis: 0;
     margin-right: 15px;
+    margin-left: 15px;
+  }
+
+  .delete-btn {
+    background-color: #f75a6e;
   }
 }

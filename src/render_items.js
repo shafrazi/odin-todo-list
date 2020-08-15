@@ -58,7 +58,7 @@ const createLi = (toDo, ulElement) => {
 
 const renderItems = (type) => {
   const ul = document.createElement("ul");
-  ul.setAttribute("class", "todos-list");
+  ul.classList.add("todos-list", type);
   itemsDiv.appendChild(ul);
   if (toDos.length > 0) {
     for (let i = 0; i < toDos.length; i++) {
@@ -86,8 +86,13 @@ const removeModalButtons = () => {
 
 const saveTask = (event) => {
   const todo = getTodoFromElement(event);
+  const sourcePage = event.target.parentElement.dataset.sourcePage;
   todo.title = modal.querySelector("#title").value;
   todo.project = modal.querySelector("#project").value;
+  modal.style.display = "none";
+  removeModalButtons();
+  clearItems();
+  renderItems(sourcePage);
 };
 
 const generateEditTaskButtons = (todo) => {
@@ -104,7 +109,7 @@ const generateEditTaskButtons = (todo) => {
     saveTask(event);
   });
 
-  deleteTaskBtn.classList.add("btn-primary", "btn-item");
+  deleteTaskBtn.classList.add("btn-primary", "btn-item", "delete-btn");
   deleteTaskBtn.setAttribute("id", "delete-task-btn");
   deleteTaskBtn.innerHTML = "Delete";
   deleteTaskBtn.addEventListener("click", () => {});
@@ -123,8 +128,11 @@ const populateForm = (todo) => {
 };
 
 const editTask = (event) => {
+  const ul = event.target.parentElement.parentElement;
+  const page = ul.classList[1];
   const todo = getTodoFromElement(event);
   const buttonsDiv = generateEditTaskButtons(todo);
+  buttonsDiv.setAttribute("data-source-page", page);
   form.appendChild(buttonsDiv);
   populateForm(todo);
   modal.style.display = "block";
