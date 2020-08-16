@@ -4,7 +4,10 @@ import {
   clearItems,
   removeModalButtons,
   generateTodoFormDiv,
-  clearTodoForm,
+  clearForm,
+  generateProjectFormDiv,
+  generateProjectNewBtn,
+  renderProjects,
 } from "./render_items";
 
 var acc = document.getElementsByClassName("accordion");
@@ -26,6 +29,8 @@ const allItems = document.querySelector("#all-items");
 const pendingItems = document.querySelector("#pending-items");
 const completedItems = document.querySelector("#completed-items");
 
+renderProjects();
+
 allItems.addEventListener("click", () => {
   clearItems();
   renderItems("all");
@@ -45,12 +50,13 @@ completedItems.addEventListener("click", () => {
 
 const modal = document.querySelector(".modal");
 const createTaskBtn = document.querySelector("#create-todo-btn");
+const addProjectBtn = document.querySelector("#add-project-btn");
 
 const generateAddTaskBtn = () => {
   const buttonsDiv = document.createElement("div");
   const titleInput = modal.querySelector("#title");
   const projectInput = modal.querySelector("#project");
-  console.log(titleInput);
+
   buttonsDiv.classList.add("button-div");
   const newTaskBtn = document.createElement("button");
   newTaskBtn.classList.add("btn-primary");
@@ -71,10 +77,18 @@ createTaskBtn.onclick = function () {
   modal.style.display = "block";
 };
 
+addProjectBtn.onclick = function () {
+  const form = generateProjectFormDiv();
+  modal.appendChild(form);
+  const buttonsDiv = generateProjectNewBtn();
+  form.appendChild(buttonsDiv);
+  modal.style.display = "block";
+};
+
 window.onclick = function (event) {
   if (event.target == modal) {
     removeModalButtons();
-    clearTodoForm();
+    clearForm();
     modal.style.display = "none";
   }
 };

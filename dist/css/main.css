@@ -140,7 +140,7 @@ ul {
 
 /* form-elements */
 
-.todo-form {
+.form {
   width: 90%;
   margin: auto;
   padding: 10px;
@@ -205,7 +205,7 @@ ul {
     /* Black w/ opacity */
   }
 
-  .todo-form {
+  .form {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
@@ -303,6 +303,22 @@ ul {
     border: none;
     border-radius: 5px;
     height: 30px;
-    width: 100px;
+    width: 150px;
+    font-size: 15px;
+    ;
+  }
+
+  .projects-ul {
+    padding-left: 15px;
+    margin-top: 20px;
+    border-left: solid gray;
+  }
+
+  .projects-ul a {
+    text-decoration: none;
+  }
+
+  .project-item {
+    padding: 5px;
   }
 }

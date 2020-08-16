@@ -1,9 +1,28 @@
 import { Todo } from "./todo";
+import { Project } from "./project";
 
 const toDos = [];
+const projects = [];
 const modal = document.querySelector(".modal");
-// const form = modal.querySelector(".new-todo-form");
 const itemsDiv = document.querySelector(".items");
+
+let defaultProject = new Project("General");
+defaultProject.id = 0;
+projects.push(defaultProject);
+
+const renderProjects = () => {
+  const ul = document.querySelector(".projects-ul");
+  for (let i = 0; i < projects.length; i++) {
+    let project = projects[i];
+    let li = project.createLi();
+    ul.appendChild(li);
+  }
+};
+
+const clearProjects = () => {
+  const ul = document.querySelector(".projects-ul");
+  ul.innerHTML = "";
+};
 
 const getTodoFromElement = (event) => {
   const parent = event.target.parentElement;
@@ -43,6 +62,17 @@ const addTask = (title, project) => {
   checkbox.addEventListener("change", checkTask);
   clearItems();
   renderItems("all");
+};
+
+const addProject = (projectName) => {
+  if (projectName !== "") {
+    let project = new Project(projectName);
+    projects.push(project);
+    project.id = projects.length - 1;
+
+    clearProjects();
+    renderProjects();
+  }
 };
 
 const createLi = (toDo, ulElement) => {
@@ -91,7 +121,7 @@ const generateTodoFormDiv = () => {
   const formGroupTitle = document.createElement("div");
   const labelTitle = document.createElement("label");
   const inputTitle = document.createElement("input");
-  div.classList.add("todo-form");
+  div.classList.add("form");
   formGroupTitle.classList.add("form-group");
   inputTitle.type = "text";
   formGroupTitle.appendChild(labelTitle);
@@ -105,15 +135,33 @@ const generateTodoFormDiv = () => {
   return div;
 };
 
-const clearTodoForm = () => {
-  const todoForm = modal.firstElementChild;
-  modal.removeChild(todoForm);
+const generateProjectFormDiv = () => {
+  const div = document.createElement("div");
+  const formGroupProject = document.createElement("div");
+  const labelName = document.createElement("label");
+  const inputName = document.createElement("input");
+  div.classList.add("form");
+  formGroupProject.classList.add("form-group");
+  inputName.type = "text";
+  formGroupProject.appendChild(labelName);
+  formGroupProject.appendChild(inputName);
+
+  setFormElementAttributes(formGroupProject, "name");
+
+  div.appendChild(formGroupProject);
+
+  return div;
+};
+
+const clearForm = () => {
+  const formElement = modal.firstElementChild;
+  modal.removeChild(formElement);
 };
 
 const removeModalButtons = () => {
   const buttonsDiv = modal.querySelector(".button-div");
-  const todoForm = modal.querySelector(".todo-form");
-  todoForm.removeChild(buttonsDiv);
+  const form = modal.querySelector(".form");
+  form.removeChild(buttonsDiv);
 };
 
 const saveTask = (event) => {
@@ -123,6 +171,7 @@ const saveTask = (event) => {
   todo.project = modal.querySelector("#project").value;
   modal.style.display = "none";
   removeModalButtons();
+  clearForm();
   clearItems();
   renderItems(sourcePage);
 };
@@ -150,12 +199,28 @@ const generateEditTaskButtons = (todo) => {
   return buttonsDiv;
 };
 
+const generateProjectNewBtn = () => {
+  const buttonsDiv = document.createElement("div");
+  const projectNameInput = modal.querySelector("#name");
+
+  buttonsDiv.classList.add("button-div");
+  const newProjectBtn = document.createElement("button");
+  newProjectBtn.classList.add("btn-primary");
+  newProjectBtn.setAttribute("id", "new-project-btn");
+  newProjectBtn.innerHTML = "Add project";
+  newProjectBtn.addEventListener("click", () => {
+    addProject(projectNameInput.value);
+  });
+  buttonsDiv.appendChild(newProjectBtn);
+  return buttonsDiv;
+};
+
 const clearItems = () => {
   itemsDiv.innerHTML = "";
 };
 
 const populateForm = (todo) => {
-  const form = document.querySelector(".todo-form");
+  const form = document.querySelector(".form");
   form.querySelector("#title").value = todo.title;
   form.querySelector("#project").value = todo.project;
 };
@@ -167,7 +232,7 @@ const editTask = (event) => {
   const todo = getTodoFromElement(event);
   const buttonsDiv = generateEditTaskButtons(todo);
   if (modal.firstElementChild) {
-    clearTodoForm();
+    clearForm();
   }
   modal.appendChild(form);
   buttonsDiv.setAttribute("data-source-page", page);
@@ -182,5 +247,8 @@ export {
   clearItems,
   removeModalButtons,
   generateTodoFormDiv,
-  clearTodoForm,
+  clearForm,
+  generateProjectFormDiv,
+  generateProjectNewBtn,
+  renderProjects,
 };
