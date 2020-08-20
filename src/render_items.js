@@ -116,6 +116,14 @@ const setFormElementAttributes = (div, field) => {
   input.setAttribute("id", field);
 };
 
+const populateSelectField = (projects, field) => {
+  for (let i = 0; i < projects.length; i++) {
+    let option = document.createElement("option");
+    option.text = projects[i].name;
+    field.add(option);
+  }
+};
+
 const generateTodoFormDiv = () => {
   const div = document.createElement("div");
   const formGroupTitle = document.createElement("div");
@@ -127,9 +135,18 @@ const generateTodoFormDiv = () => {
   formGroupTitle.appendChild(labelTitle);
   formGroupTitle.appendChild(inputTitle);
 
-  const formGroupProject = formGroupTitle.cloneNode(true);
+  // const formGroupProject = formGroupTitle.cloneNode(true);
+  const formGroupProject = document.createElement("div");
+  const labelProject = document.createElement("label");
+  const selectProject = document.createElement("select");
+  selectProject.setAttribute("id", "project");
+  formGroupProject.classList.add("form-group");
+  formGroupProject.appendChild(labelProject);
+  formGroupProject.appendChild(selectProject);
+  populateSelectField(projects, selectProject);
+
   setFormElementAttributes(formGroupTitle, "title");
-  setFormElementAttributes(formGroupProject, "project");
+  // setFormElementAttributes(formGroupProject, "project");
   div.appendChild(formGroupTitle);
   div.appendChild(formGroupProject);
   return div;
