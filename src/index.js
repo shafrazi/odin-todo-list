@@ -63,7 +63,7 @@ const generateAddTaskBtn = () => {
   newTaskBtn.setAttribute("id", "new-task-btn");
   newTaskBtn.innerHTML = "Add task";
   newTaskBtn.addEventListener("click", () => {
-    addTask(titleInput.value, projectInput.value);
+    addTask(titleInput, projectInput);
   });
   buttonsDiv.appendChild(newTaskBtn);
   return buttonsDiv;

@@ -33,6 +33,16 @@ const getTodoFromElement = (event) => {
   return todo;
 };
 
+const getProjectFromOption = (projectElement) => {
+  const option = projectElement.options[projectElement.selectedIndex];
+  const projectId = parseInt(option.dataset.projectId);
+  const project = projects.find((project) => {
+    return project.id === projectId;
+  });
+
+  return project;
+};
+
 const checkTask = (event) => {
   const todo = getTodoFromElement(event);
   todo.switchComplete();
@@ -50,18 +60,24 @@ const deleteTask = (event) => {
   li.style.display = "none";
 };
 
-const addTask = (title, project) => {
+const addTask = (titleElement, projectElement) => {
+  const title = titleElement.value;
+  const projectText = projectElement.value;
+  const project = getProjectFromOption(projectElement);
   const ul = document.querySelector(".pending-todos-list");
 
-  let toDo = new Todo(title, project);
+  let toDo = new Todo(title, projectText);
   toDos.push(toDo);
+  project.todos.push(toDo);
   toDo.id = toDos.length - 1;
+
   const li = toDo.createTodoLi();
   const checkbox = li.firstElementChild;
   ul.appendChild(li);
   checkbox.addEventListener("change", checkTask);
   clearItems();
   renderItems("all");
+  console.log(project.todos);
 };
 
 const addProject = (projectName) => {
@@ -120,6 +136,7 @@ const populateSelectField = (projects, field) => {
   for (let i = 0; i < projects.length; i++) {
     let option = document.createElement("option");
     option.text = projects[i].name;
+    option.setAttribute("data-project-id", projects[i].id);
     field.add(option);
   }
 };
