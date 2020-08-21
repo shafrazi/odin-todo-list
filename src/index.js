@@ -92,3 +92,9 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 };
+
+window.onresize = function () {
+  removeModalButtons();
+  clearForm();
+  modal.style.display = "none";
+};

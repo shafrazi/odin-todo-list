@@ -139,6 +139,8 @@ const generateTodoFormDiv = () => {
   const formGroupProject = document.createElement("div");
   const labelProject = document.createElement("label");
   const selectProject = document.createElement("select");
+  labelProject.htmlFor = "project";
+  labelProject.innerHTML = "Project : ";
   selectProject.setAttribute("id", "project");
   formGroupProject.classList.add("form-group");
   formGroupProject.appendChild(labelProject);
