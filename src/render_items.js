@@ -10,13 +10,36 @@ let defaultProject = new Project("General");
 defaultProject.id = 0;
 projects.push(defaultProject);
 
+const displayTitle = (event) => {
+  const titleDiv = document.querySelector(".title");
+  const source = event.target;
+  const sourceText = source.innerHTML;
+  titleDiv.innerHTML = sourceText;
+};
+
 const renderProjects = () => {
   const ul = document.querySelector(".projects-ul");
   for (let i = 0; i < projects.length; i++) {
     let project = projects[i];
     let li = project.createLi();
+
+    li.firstElementChild.addEventListener("click", function () {
+      clearItems();
+      displayTitle(event);
+      renderItems("all", getProjectTodosFromElement(event));
+    });
     ul.appendChild(li);
   }
+};
+
+const getProjectTodosFromElement = (event) => {
+  const li = event.target.parentElement;
+  const projectId = parseInt(li.dataset.projectId);
+  const project = projects.find((project) => {
+    return project.id === projectId;
+  });
+
+  return project.todos;
 };
 
 const clearProjects = () => {
@@ -84,7 +107,7 @@ const addProject = (projectName) => {
     let project = new Project(projectName);
     projects.push(project);
     project.id = projects.length - 1;
-
+    console.log("hello");
     clearProjects();
     renderProjects();
   }
@@ -101,13 +124,13 @@ const createLi = (toDo, ulElement) => {
   editButton.addEventListener("click", editTask);
 };
 
-const renderItems = (type) => {
+const renderItems = (type, collection = toDos) => {
   const ul = document.createElement("ul");
   ul.classList.add("todos-list", type);
   itemsDiv.appendChild(ul);
-  if (toDos.length > 0) {
-    for (let i = 0; i < toDos.length; i++) {
-      const toDo = toDos[i];
+  if (collection.length > 0) {
+    for (let i = 0; i < collection.length; i++) {
+      const toDo = collection[i];
       if (type === "pending") {
         if (!toDo.complete) {
           createLi(toDo, ul);
@@ -120,6 +143,8 @@ const renderItems = (type) => {
         createLi(toDo, ul);
       }
     }
+  } else {
+    ul.innerHTML = "Nothing to show";
   }
 };
 
@@ -286,4 +311,5 @@ export {
   generateProjectFormDiv,
   generateProjectNewBtn,
   renderProjects,
+  displayTitle,
 };

@@ -231,6 +231,14 @@ ul {
     grid-area: btn-area;
   }
 
+  .title {
+    grid-area: title;
+    text-align: left;
+    padding-left: 30px;
+    font-size: 23px;
+    text-decoration: underline;
+  }
+
   .items {
     margin: 10px;
     grid-area: items;
@@ -242,9 +250,10 @@ ul {
     text-align: center;
     grid-gap: 5px;
     grid-template-columns: 1fr;
-    grid-template-rows: 1fr 5fr;
+    grid-template-rows: 0.3fr 0.3fr 5fr;
     grid-template-areas:
       "btn-area"
+      "title"
       "items";
   }
 

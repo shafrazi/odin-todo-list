@@ -8,6 +8,7 @@ import {
   generateProjectFormDiv,
   generateProjectNewBtn,
   renderProjects,
+  displayTitle,
 } from "./render_items";
 
 var acc = document.getElementsByClassName("accordion");
@@ -34,16 +35,19 @@ renderProjects();
 allItems.addEventListener("click", () => {
   clearItems();
   renderItems("all");
+  displayTitle(event);
 });
 
 pendingItems.addEventListener("click", () => {
   clearItems();
   renderItems("pending");
+  displayTitle(event);
 });
 
 completedItems.addEventListener("click", () => {
   clearItems();
   renderItems("complete");
+  displayTitle(event);
 });
 
 // create new task modal
@@ -94,7 +98,9 @@ window.onclick = function (event) {
 };
 
 window.onresize = function () {
-  removeModalButtons();
-  clearForm();
+  if (document.querySelector(".form")) {
+    removeModalButtons();
+    clearForm();
+  }
   modal.style.display = "none";
 };
