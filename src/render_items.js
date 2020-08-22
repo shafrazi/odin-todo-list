@@ -77,7 +77,6 @@ const addTask = (titleElement, projectElement) => {
   checkbox.addEventListener("change", checkTask);
   clearItems();
   renderItems("all");
-  console.log(project.todos);
 };
 
 const addProject = (projectName) => {
