@@ -74,10 +74,18 @@ const checkTask = (event) => {
 const deleteTask = (event) => {
   const li = event.target.parentElement;
   const todo = getTodoFromElement(event);
+  const project = todo.project;
+  const projectTodos = project.todos;
 
   for (let i = 0; i < toDos.length; i++) {
     if (toDos[i] === todo) {
       toDos.splice(i, 1);
+    }
+  }
+
+  for (let i = 0; i < projectTodos.length; i++) {
+    if (projectTodos[i] === todo) {
+      projectTodos.splice(i, 1);
     }
   }
   li.style.display = "none";
@@ -85,11 +93,11 @@ const deleteTask = (event) => {
 
 const addTask = (titleElement, projectElement) => {
   const title = titleElement.value;
-  const projectText = projectElement.value;
+  // const projectText = projectElement.value;
   const project = getProjectFromOption(projectElement);
   const ul = document.querySelector(".pending-todos-list");
 
-  let toDo = new Todo(title, projectText);
+  let toDo = new Todo(title, project);
   toDos.push(toDo);
   project.todos.push(toDo);
   toDo.id = toDos.length - 1;
@@ -218,17 +226,34 @@ const clearForm = () => {
   modal.removeChild(formElement);
 };
 
+const switchProject = (todo, previousProject, newProject) => {
+  todo.project = newProject;
+  for (let i = 0; i < previousProject.todos.length; i++) {
+    if (previousProject.todos[i] === todo) {
+      previousProject.todos.splice(i, 1);
+    }
+  }
+
+  newProject.todos.push(todo);
+};
+
 const removeModalButtons = () => {
   const buttonsDiv = modal.querySelector(".button-div");
   const form = modal.querySelector(".form");
   form.removeChild(buttonsDiv);
 };
 
-const saveTask = (event) => {
+const saveTask = (event, currentProject) => {
   const todo = getTodoFromElement(event);
   const sourcePage = event.target.parentElement.dataset.sourcePage;
+  const projectSelect = document.querySelector("#project");
+
+  const newProject = getProjectFromOption(projectSelect);
+  console.log(newProject);
   todo.title = modal.querySelector("#title").value;
-  todo.project = modal.querySelector("#project").value;
+  // todo.project = modal.querySelector("#project").value;
+  projectSelect.onchange = switchProject(todo, currentProject, newProject);
+
   modal.style.display = "none";
   removeModalButtons();
   clearForm();
@@ -242,12 +267,13 @@ const generateEditTaskButtons = (todo) => {
   buttonsDiv.setAttribute("data-todo-id", `${todo.id}`);
   const saveTaskBtn = document.createElement("button");
   const deleteTaskBtn = document.createElement("button");
+  const currentProject = todo.project;
 
   saveTaskBtn.classList.add("btn-primary", "btn-item");
   saveTaskBtn.setAttribute("id", "save-task-btn");
   saveTaskBtn.innerHTML = "Save";
   saveTaskBtn.addEventListener("click", (event) => {
-    saveTask(event);
+    saveTask(event, currentProject);
   });
 
   deleteTaskBtn.classList.add("btn-primary", "btn-item", "delete-btn");
@@ -282,7 +308,7 @@ const clearItems = () => {
 const populateForm = (todo) => {
   const form = document.querySelector(".form");
   form.querySelector("#title").value = todo.title;
-  form.querySelector("#project").value = todo.project;
+  form.querySelector("#project").value = todo.project.name;
 };
 
 const editTask = (event) => {

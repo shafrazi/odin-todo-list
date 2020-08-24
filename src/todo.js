@@ -44,7 +44,7 @@ class Todo {
     li.appendChild(titleSpan);
     const projectSpan = document.createElement("span");
     projectSpan.setAttribute("class", "task-project");
-    projectSpan.innerHTML = this.project;
+    projectSpan.innerHTML = this.project.name;
     li.appendChild(projectSpan);
 
     li.appendChild(editButton);
